@@ -18,3 +18,13 @@ $(CPP_OUT): %: %.cpp
 
 .PHONY:: $(CPP_OUT)
 all:: $(CPP_OUT)
+
+RS_IN = $(wildcard *.rs)
+RS_OUT = $(RS_IN:.rs=)
+
+$(RS_OUT): %: %.rs
+	rustc -o a.out --crate-type=bin --crate-name=aoc $<
+	RUST_BACKTRACE=1 ./a.out
+
+.PHONY:: $(RS_OUT)
+all:: $(RS_OUT)
