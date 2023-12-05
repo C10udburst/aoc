@@ -28,3 +28,13 @@ $(RS_OUT): %: %.rs
 
 .PHONY:: $(RS_OUT)
 all:: $(RS_OUT)
+
+KT_IN = $(wildcard *.kt)
+KT_OUT = $(KT_IN:.kt=)
+
+$(KT_OUT): %: %.kt
+	kotlinc $< -include-runtime -d a.jar
+	java -jar a.jar
+
+.PHONY:: $(KT_OUT)
+all:: $(KT_OUT)
