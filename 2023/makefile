@@ -38,3 +38,11 @@ $(KT_OUT): %: %.kt
 
 .PHONY:: $(KT_OUT)
 all:: $(KT_OUT)
+
+HS_IN = $(wildcard *.hs)
+HS_OUT = $(HS_IN:.hs=)
+
+$(HS_OUT): %: %.hs
+	ghc -o a.out -dynamic $<
+	rm *.hi *.o
+	./a.out
